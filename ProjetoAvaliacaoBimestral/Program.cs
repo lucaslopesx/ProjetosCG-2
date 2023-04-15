@@ -18,36 +18,58 @@ namespace Projeto
             {
                 positionX += 0.4f;
             }
-
-            if (!isFrontWheel)
+            else
             {
                 positionX += -0.4f;
             }
+
             Gl.glPushMatrix();
             Gl.glTranslatef(positionX, 0.0f, 0.0f);
             Gl.glRotatef(rot, 0.0f, 0.0f, 1.0f);
 
-            float raio, x, y, pontos;
-            raio = 0.3f;
-            pontos = (2 * PI) / 8;
-
+            // Draw the tire
+            float raio = 0.1f;
+            int numSegments = 30;
             Gl.glColor3f(0.0f, 0.0f, 0.0f);
-            Gl.glPolygonMode(Gl.GL_FRONT_AND_BACK, Gl.GL_LINE);
-
-            Gl.glBegin(Gl.GL_TRIANGLE_FAN);
-            Gl.glVertex2f(0.0f, 0.0f);
-            for (float angulo = 0.0f; angulo <= 2 * PI; angulo += pontos)
+            Gl.glBegin(Gl.GL_POLYGON);
+            for (int i = 0; i < numSegments; i++)
             {
-                x = (float)(raio * Math.Cos(angulo));
-                y = (float)(raio * Math.Sin(angulo));
+                float angle = (float)(2 * PI * i / numSegments);
+                float x = (float)(raio * Math.Cos(angle));
+                float y = (float)(raio * Math.Sin(angle));
                 Gl.glVertex2f(x, y);
             }
-            x = (float)(raio * Math.Cos(2 * PI));
-            y = (float)(raio * Math.Sin(2 * PI));
-            Gl.glVertex2f(x, y);
-
             Gl.glEnd();
-            Gl.glFlush();
+
+            // Draw the rim
+            raio = 0.05f;
+            Gl.glColor3f(0.7f, 0.7f, 0.7f);
+            Gl.glBegin(Gl.GL_POLYGON);
+            for (int i = 0; i < numSegments; i++)
+            {
+                float angle = (float)(2 * PI * i / numSegments);
+                float x = (float)(raio * Math.Cos(angle));
+                float y = (float)(raio * Math.Sin(angle));
+                Gl.glVertex2f(x, y);
+            }
+            Gl.glEnd();
+
+            // Draw lines on the rim
+            int numLines = 8;
+            Gl.glColor3f(0.3f, 0.3f, 0.3f);
+            Gl.glBegin(Gl.GL_LINES);
+            for (int i = 0; i < numLines; i++)
+            {
+                float angle = (float)(2 * PI * i / numLines);
+                float x1 = (float)(raio * Math.Cos(angle));
+                float y1 = (float)(raio * Math.Sin(angle));
+                float x2 = (float)((raio * 1.75) * Math.Cos(angle));
+                float y2 = (float)((raio * 1.75) * Math.Sin(angle));
+                Gl.glVertex2f(x1, y1);
+                Gl.glVertex2f(x2, y2);
+            }
+            Gl.glEnd();
+
             Gl.glPopMatrix();
         }
 
@@ -56,31 +78,38 @@ namespace Projeto
             Gl.glPushMatrix();
             Gl.glTranslatef(carPositionX, 0.0f, 0.0f); // Use the carPositionX variable for translation
 
-            // desenha o corpo do carro
+            // Draw the car body
             Gl.glColor3f(1.0f, 0.0f, 0.0f);
             Gl.glPolygonMode(Gl.GL_FRONT_AND_BACK, Gl.GL_FILL);
-            Gl.glBegin(Gl.GL_QUADS);
-            Gl.glVertex2f(-0.5f, 0.0f);
-            Gl.glVertex2f(0.5f, 0.0f);
-            Gl.glVertex2f(0.5f, 0.5f);
-            Gl.glVertex2f(-0.5f, 0.5f);
+            Gl.glBegin(Gl.GL_POLYGON);
+            Gl.glVertex2f(-0.6f, 0.1f);
+            Gl.glVertex2f(0.6f, 0.1f);
+            Gl.glVertex2f(0.6f, 0.2f);
+            Gl.glVertex2f(0.4f, 0.35f);
+            Gl.glVertex2f(-0.4f, 0.35f);
+            Gl.glVertex2f(-0.6f, 0.2f);
             Gl.glEnd();
 
-            // desenha as janelas do carro
-            Gl.glColor3f(0.0f, 0.0f, 1.0f);
+            // Draw the car roof
+            Gl.glColor3f(0.7f, 0.0f, 0.0f);
+            Gl.glPolygonMode(Gl.GL_FRONT_AND_BACK, Gl.GL_FILL);
+            Gl.glBegin(Gl.GL_POLYGON);
+            Gl.glVertex2f(-0.4f, 0.35f);
+            Gl.glVertex2f(0.4f, 0.35f);
+            Gl.glVertex2f(0.3f, 0.5f);
+            Gl.glVertex2f(-0.3f, 0.5f);
+            Gl.glEnd();
+
+            // Draw the windows
+            Gl.glColor3f(1.0f, 1.0f, 1.0f);
             Gl.glBegin(Gl.GL_QUADS);
 
-            // janela esquerda
-            Gl.glVertex2f(-0.4f, 0.3f);
-            Gl.glVertex2f(-0.1f, 0.3f);
-            Gl.glVertex2f(-0.1f, 0.45f);
-            Gl.glVertex2f(-0.4f, 0.45f);
 
-            // janela direita
-            Gl.glVertex2f(0.1f, 0.3f);
-            Gl.glVertex2f(0.4f, 0.3f);
-            Gl.glVertex2f(0.4f, 0.45f);
-            Gl.glVertex2f(0.1f, 0.45f);
+            // Right window
+            Gl.glVertex2f(0.0f, 0.4f);
+            Gl.glVertex2f(0.3f, 0.4f);
+            Gl.glVertex2f(0.3f, 0.47f);
+            Gl.glVertex2f(0.0f, 0.47f);
 
             Gl.glEnd();
             Gl.glPopMatrix();
@@ -88,15 +117,20 @@ namespace Projeto
 
 
 
+
+
         static void display()
         {
             Gl.glClear(Gl.GL_COLOR_BUFFER_BIT);
+
+            rot -= 0.8f; // Add this line to increment the rotation value
 
             desenhaCirculo(true);
             desenhaCirculo(false);
             desenhaCarro();
 
             Glut.glutSwapBuffers();
+            Glut.glutPostRedisplay(); // Add this line to force a constant redrawing of the scene
         }
 
         static void inicializa()
@@ -110,13 +144,19 @@ namespace Projeto
             switch (key)
             {
                 case Glut.GLUT_KEY_LEFT:
-                    rot += 10.0f;
-                    carPositionX -= 0.05f;
+                    if (carPositionX > -0.9f) // Check if the car is within the left boundary
+                    {
+                        rot += 10.0f;
+                        carPositionX -= 0.05f;
+                    }
                     break;
 
                 case Glut.GLUT_KEY_RIGHT:
-                    rot -= 10.0f;
-                    carPositionX += 0.05f;
+                    if (carPositionX < 0.9f) // Check if the car is within the right boundary
+                    {
+                        rot -= 10.0f;
+                        carPositionX += 0.05f;
+                    }
                     break;
 
                 case Glut.GLUT_KEY_UP: // Add case for the up arrow key
@@ -128,6 +168,7 @@ namespace Projeto
 
             Glut.glutPostRedisplay();
         }
+
 
         static void Main()
         {
