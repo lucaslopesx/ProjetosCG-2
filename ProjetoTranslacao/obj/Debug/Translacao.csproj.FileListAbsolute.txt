@@ -1,0 +1,13 @@
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\ProjetoTranslacao\bin\Debug\ProjetoTranslacao.exe.config
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\ProjetoTranslacao\bin\Debug\ProjetoTranslacao.exe
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\ProjetoTranslacao\bin\Debug\ProjetoTranslacao.pdb
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\ProjetoTranslacao\bin\Debug\Tao.FreeGlut.dll
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\ProjetoTranslacao\bin\Debug\Tao.OpenGl.dll
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\ProjetoTranslacao\bin\Debug\Tao.FreeGlut.xml
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\ProjetoTranslacao\bin\Debug\Tao.OpenGl.xml
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\ProjetoTranslacao\obj\Debug\Translacao.csproj.AssemblyReference.cache
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\ProjetoTranslacao\obj\Debug\Translacao.csproj.SuggestedBindingRedirects.cache
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\ProjetoTranslacao\obj\Debug\Translacao.csproj.CoreCompileInputs.cache
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\ProjetoTranslacao\obj\Debug\Translacao.csproj.CopyComplete
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\ProjetoTranslacao\obj\Debug\ProjetoTranslacao.exe
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\ProjetoTranslacao\obj\Debug\ProjetoTranslacao.pdb

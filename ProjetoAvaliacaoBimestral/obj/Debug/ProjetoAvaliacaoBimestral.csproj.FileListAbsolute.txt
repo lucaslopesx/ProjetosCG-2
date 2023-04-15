@@ -1,0 +1,13 @@
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\ProjetoAvaliacaoBimestral\obj\Debug\ProjetoAvaliacaoBimestral.csproj.AssemblyReference.cache
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\ProjetoAvaliacaoBimestral\obj\Debug\ProjetoAvaliacaoBimestral.csproj.SuggestedBindingRedirects.cache
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\ProjetoAvaliacaoBimestral\obj\Debug\ProjetoAvaliacaoBimestral.csproj.CoreCompileInputs.cache
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\ProjetoAvaliacaoBimestral\bin\Debug\ProjetoAvaliacaoBimestral.exe.config
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\ProjetoAvaliacaoBimestral\bin\Debug\ProjetoAvaliacaoBimestral.exe
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\ProjetoAvaliacaoBimestral\bin\Debug\ProjetoAvaliacaoBimestral.pdb
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\ProjetoAvaliacaoBimestral\bin\Debug\Tao.FreeGlut.dll
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\ProjetoAvaliacaoBimestral\bin\Debug\Tao.OpenGl.dll
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\ProjetoAvaliacaoBimestral\bin\Debug\Tao.FreeGlut.xml
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\ProjetoAvaliacaoBimestral\bin\Debug\Tao.OpenGl.xml
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\ProjetoAvaliacaoBimestral\obj\Debug\ProjetoAvaliacaoBimestral.csproj.CopyComplete
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\ProjetoAvaliacaoBimestral\obj\Debug\ProjetoAvaliacaoBimestral.exe
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\ProjetoAvaliacaoBimestral\obj\Debug\ProjetoAvaliacaoBimestral.pdb

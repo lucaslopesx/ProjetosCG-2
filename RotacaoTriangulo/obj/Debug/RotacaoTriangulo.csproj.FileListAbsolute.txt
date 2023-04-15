@@ -1,0 +1,13 @@
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\RotacaoTriangulo\obj\Debug\RotacaoTriangulo.csproj.AssemblyReference.cache
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\RotacaoTriangulo\obj\Debug\RotacaoTriangulo.csproj.SuggestedBindingRedirects.cache
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\RotacaoTriangulo\obj\Debug\RotacaoTriangulo.csproj.CoreCompileInputs.cache
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\RotacaoTriangulo\bin\Debug\RotacaoTriangulo.exe.config
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\RotacaoTriangulo\bin\Debug\RotacaoTriangulo.exe
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\RotacaoTriangulo\bin\Debug\RotacaoTriangulo.pdb
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\RotacaoTriangulo\bin\Debug\Tao.FreeGlut.dll
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\RotacaoTriangulo\bin\Debug\Tao.OpenGl.dll
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\RotacaoTriangulo\bin\Debug\Tao.FreeGlut.xml
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\RotacaoTriangulo\bin\Debug\Tao.OpenGl.xml
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\RotacaoTriangulo\obj\Debug\RotacaoTriangulo.csproj.CopyComplete
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\RotacaoTriangulo\obj\Debug\RotacaoTriangulo.exe
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\RotacaoTriangulo\obj\Debug\RotacaoTriangulo.pdb

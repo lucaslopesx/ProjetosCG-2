@@ -1,0 +1,13 @@
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\Rotacao\obj\Debug\Rotacao.csproj.AssemblyReference.cache
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\Rotacao\obj\Debug\Rotacao.csproj.SuggestedBindingRedirects.cache
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\Rotacao\obj\Debug\Rotacao.csproj.CoreCompileInputs.cache
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\Rotacao\bin\Debug\Rotacao.exe.config
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\Rotacao\bin\Debug\Rotacao.exe
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\Rotacao\bin\Debug\Rotacao.pdb
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\Rotacao\bin\Debug\Tao.FreeGlut.dll
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\Rotacao\bin\Debug\Tao.OpenGl.dll
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\Rotacao\bin\Debug\Tao.FreeGlut.xml
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\Rotacao\bin\Debug\Tao.OpenGl.xml
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\Rotacao\obj\Debug\Rotacao.csproj.CopyComplete
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\Rotacao\obj\Debug\Rotacao.exe
+C:\Users\lucas lopes\Documents\GitHub\unifenas\Computacao grafica\ProjetosCG\Rotacao\obj\Debug\Rotacao.pdb
