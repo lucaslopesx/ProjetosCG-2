@@ -13,7 +13,9 @@ namespace Projeto
         const float PI = 3.14f;
         static int step = 0;
         static int horario = 0;
-        static CorFundo corFundo = new CorFundo(r: 0.086f, g: 0.447f, b: 0.698f);
+        static Cor CorFundo = new Cor(r: 0.086f, g: 0.447f, b: 0.698f);
+        static Cor CorCarro = new Cor(r: 1.0f, g: 0f, b: 0f);
+        static Cor CorTetoCarro = new Cor(r: 0.7f, g: 0f, b: 0f);
         static float posicaoNuvens1 = 0.0f;
         static float posicaoNuvens2 = 0.5f;
         static float posicaoNuvens3 = -0.6f;
@@ -22,9 +24,11 @@ namespace Projeto
         static float posicaoNuvens6 = 0.7f;
         const int width = 1200;
         const int height = 800;
+        static bool isCloudsAvailable = true;
+        static bool isCarOn = true;
 
 
-        static void desenhaCirculo(bool isFrontWheel)
+        static void desenhaRoda(bool isFrontWheel)
         {
             float positionX = carPositionX;
             if (isFrontWheel)
@@ -38,7 +42,11 @@ namespace Projeto
 
             Gl.glPushMatrix();
             Gl.glTranslatef(positionX, 0.15f, 0.1f);
-            Gl.glRotatef(rot, 0.0f, 0.0f, 1.0f);
+            if (isCarOn)
+            {
+                Gl.glRotatef(rot, 0.0f, 0.0f, 1.0f);
+            }
+
             Gl.glScalef(0.3f, 0.3f, 0.3f);
 
             // Draw the tire
@@ -89,12 +97,15 @@ namespace Projeto
 
         static void desenhaCarro()
         {
+
+            Cor corpo = CorCarro;
+            Cor teto = CorTetoCarro;
             Gl.glPushMatrix();
             Gl.glTranslatef(carPositionX, 0.15f, 0.0f); // Use the carPositionX variable for translation
             Gl.glScalef(0.2f, 0.2f, 0.2f);
 
             // Draw the car body
-            Gl.glColor3f(1.0f, 0.0f, 0.0f);
+            Gl.glColor3f(corpo.R, corpo.G, corpo.B);
             Gl.glPolygonMode(Gl.GL_FRONT_AND_BACK, Gl.GL_FILL);
             Gl.glBegin(Gl.GL_POLYGON);
             Gl.glVertex2f(-0.6f, 0.1f);
@@ -106,7 +117,7 @@ namespace Projeto
             Gl.glEnd();
 
             // Draw the car roof
-            Gl.glColor3f(0.7f, 0.0f, 0.0f);
+            Gl.glColor3f(teto.R, teto.G, teto.B);
             Gl.glPolygonMode(Gl.GL_FRONT_AND_BACK, Gl.GL_FILL);
             Gl.glBegin(Gl.GL_POLYGON);
             Gl.glVertex2f(-0.4f, 0.35f);
@@ -140,12 +151,15 @@ namespace Projeto
 
             rot -= 0.8f; // Add this line to increment the rotation value
 
-            fundo(corFundo);
+            fundo(CorFundo);
 
-            DesenharVariasNuvens();
+            if (isCloudsAvailable)
+            {
+                DesenharVariasNuvens();
+            }
 
-            desenhaCirculo(true);
-            desenhaCirculo(false);
+            desenhaRoda(true);
+            desenhaRoda(false);
             desenhaCarro();
 
 
@@ -159,7 +173,7 @@ namespace Projeto
             switch (key)
             {
                 case Glut.GLUT_KEY_LEFT:
-                    if (carPositionX > 0.1f) // Check if the car is within the left boundary
+                    if (carPositionX > 0.1f && isCarOn) // Check if the car is within the left boundary
                     {
                         rot += 10.0f;
                         carPositionX -= 0.05f;
@@ -167,7 +181,7 @@ namespace Projeto
                     break;
 
                 case Glut.GLUT_KEY_RIGHT:
-                    if (carPositionX < 0.9f) // Check if the car is within the right boundary
+                    if (carPositionX < 0.9f && isCarOn) // Check if the car is within the right boundary
                     {
                         rot -= 10.0f;
                         carPositionX += 0.05f;
@@ -195,6 +209,7 @@ namespace Projeto
             Glut.glutDisplayFunc(display);
             Glut.glutTimerFunc(40, Timer, 1);
             Glut.glutTimerFunc(40, TimerNuvem, 1);
+            CreatePopupMenu();
             inicializa();
             Glut.glutMainLoop();
         }
@@ -227,7 +242,7 @@ namespace Projeto
             Gl.glMatrixMode(Gl.GL_MODELVIEW);
             Gl.glLoadIdentity();
         }
-        static void fundo(CorFundo corFundo)
+        static void fundo(Cor Cor)
         {
             Gl.glClear(Gl.GL_COLOR_BUFFER_BIT);
             ConfigurarHorarioDia();
@@ -248,29 +263,29 @@ namespace Projeto
         {
             const int num_steps = 100; // número de passos para a transição completa
             float t = (float)step / num_steps; // progresso da transição, entre 0 e 1
-            CorFundo corAnterior = corFundo;
-            CorFundo corNova = null;
+            Cor corAnterior = CorFundo;
+            Cor corNova = null;
 
             switch (horario)
             {
                 case 0: // Dia para tarde
                     if (step < num_steps / 2)
-                        corNova = LerpCor(corAnterior, new CorFundo(r: 0.0f, g: 0.74902f, b: 1.0f), t);
+                        corNova = LerpCor(corAnterior, new Cor(r: 0.0f, g: 0.74902f, b: 1.0f), t);
                     else
-                        corNova = LerpCor(corAnterior, new CorFundo(r: 0.086f, g: 0.447f, b: 0.698f), t);
+                        corNova = LerpCor(corAnterior, new Cor(r: 0.086f, g: 0.447f, b: 0.698f), t);
                     break;
                 case 1: // Tarde para noite
-                    corNova = LerpCor(corAnterior, new CorFundo(r: 0.086f, g: 0.447f, b: 0.698f), t);
+                    corNova = LerpCor(corAnterior, new Cor(r: 0.086f, g: 0.447f, b: 0.698f), t);
                     break;
                 case 2: // Noite para dia
-                    corNova = LerpCor(corAnterior, new CorFundo(r: 0.0f, g: 0.0f, b: 0.0f), t);
+                    corNova = LerpCor(corAnterior, new Cor(r: 0.0f, g: 0.0f, b: 0.0f), t);
                     break;
             }
 
             if (corNova != null)
             {
-                corFundo = corNova;
-                fundo(corFundo);
+                CorFundo = corNova;
+                fundo(CorFundo);
                 Glut.glutPostRedisplay();
             }
 
@@ -283,17 +298,17 @@ namespace Projeto
 
             Glut.glutTimerFunc(50, Timer, 1);
         }
-        static CorFundo LerpCor(CorFundo corFundoA, CorFundo corFundoB, float t)
+        static Cor LerpCor(Cor CorA, Cor CorB, float t)
         {
-            float r = (1 - t) * corFundoA.R + t * corFundoB.R;
-            float g = (1 - t) * corFundoA.G + t * corFundoB.G;
-            float b = (1 - t) * corFundoA.B + t * corFundoB.B;
-            return new CorFundo(r, g, b);
+            float r = (1 - t) * CorA.R + t * CorB.R;
+            float g = (1 - t) * CorA.G + t * CorB.G;
+            float b = (1 - t) * CorA.B + t * CorB.B;
+            return new Cor(r, g, b);
         }
 
-        public class CorFundo
+        public class Cor
         {
-            public CorFundo(float r, float g, float b)
+            public Cor(float r, float g, float b)
             {
                 R = r;
                 G = g;
@@ -390,7 +405,7 @@ namespace Projeto
             Gl.glVertex2f(0, height); // Top-left
             Gl.glVertex2f(width, height); // Top-right
 
-            Gl.glColor3f(corFundo.R, corFundo.G, corFundo.B);
+            Gl.glColor3f(CorFundo.R, CorFundo.G, CorFundo.B);
             Gl.glVertex2f(width, 0); // Bottom-right
             Gl.glVertex2f(0, 0); // Bottom-left
             Gl.glEnd();
@@ -482,6 +497,48 @@ namespace Projeto
             Gl.glTranslatef(0.2f, 0.2f, 0.0f);
             Glut.glutSolidSphere(0.15f, 20, 20);
             Gl.glPopMatrix();
+        }
+
+        private static void RenderScene()
+        {
+            Gl.glClear(Gl.GL_COLOR_BUFFER_BIT);
+            Glut.glutSwapBuffers();
+        }
+
+        private static void MenuCallback(int value)
+        {
+            switch (value)
+            {
+                case 1:
+                    CorCarro = new Cor(r: 0.0f, g: 0.0f, b: 1.0f);
+                    CorTetoCarro = new Cor(r: 0.0f, g: 0.0f, b: 0.7f);
+                    break;
+                case 2:
+                    CorCarro = new Cor(r: 0.0f, g: 1.0f, b: 0.0f);
+                    CorTetoCarro = new Cor(r: 0.0f, g: 0.7f, b: 0.0f);
+                    break;
+                case 3:
+                    CorCarro = new Cor(r: 1.0f, g: 0.0f, b: 0.0f);
+                    CorTetoCarro = new Cor(r: 0.7f, g: 0.0f, b: 0.0f);
+                    break;
+                case 4:
+                    isCloudsAvailable = !isCloudsAvailable;
+                    break;
+                case 5:
+                    isCarOn = !isCarOn;
+                    break;
+            }
+        }
+
+        private static void CreatePopupMenu()
+        {
+            int menu = Glut.glutCreateMenu(MenuCallback);
+            Glut.glutAddMenuEntry("Trocar cor do carro para azul", 1);
+            Glut.glutAddMenuEntry("Trocar cor do carro para verde", 2);
+            Glut.glutAddMenuEntry("Trocar cor do carro para vermelho", 3);
+            Glut.glutAddMenuEntry("Remover nuvens", 4);
+            Glut.glutAddMenuEntry("Desligar o carro", 5);
+            Glut.glutAttachMenu(Glut.GLUT_RIGHT_BUTTON);
         }
     }
 }
