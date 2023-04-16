@@ -29,22 +29,22 @@ namespace Projeto
             float positionX = carPositionX;
             if (isFrontWheel)
             {
-                positionX += 0.2f;
+                positionX += 0.1f;
             }
             else
             {
-                positionX += -0.2f;
+                positionX += -0.1f;
             }
 
             Gl.glPushMatrix();
-            Gl.glTranslatef(positionX, 0.0f, 0.0f);
+            Gl.glTranslatef(positionX, 0.15f, 0.1f);
             Gl.glRotatef(rot, 0.0f, 0.0f, 1.0f);
-            Gl.glScalef(0.5f, 0.5f, 0.5f);
+            Gl.glScalef(0.3f, 0.3f, 0.3f);
 
             // Draw the tire
             float raio = 0.1f;
             int numSegments = 30;
-            Gl.glColor3f(0.0f, 0.0f, 0.0f);
+            Gl.glColor3f(0.0f, 0.0f, 0.3f);
             Gl.glBegin(Gl.GL_POLYGON);
             for (int i = 0; i < numSegments; i++)
             {
@@ -90,8 +90,8 @@ namespace Projeto
         static void desenhaCarro()
         {
             Gl.glPushMatrix();
-            Gl.glTranslatef(carPositionX, 0.0f, 0.0f); // Use the carPositionX variable for translation
-            Gl.glScalef(0.5f, 0.5f, 0.5f);
+            Gl.glTranslatef(carPositionX, 0.15f, 0.0f); // Use the carPositionX variable for translation
+            Gl.glScalef(0.2f, 0.2f, 0.2f);
 
             // Draw the car body
             Gl.glColor3f(1.0f, 0.0f, 0.0f);
@@ -159,7 +159,7 @@ namespace Projeto
             switch (key)
             {
                 case Glut.GLUT_KEY_LEFT:
-                    if (carPositionX > -0.9f) // Check if the car is within the left boundary
+                    if (carPositionX > 0.1f) // Check if the car is within the left boundary
                     {
                         rot += 10.0f;
                         carPositionX -= 0.05f;
@@ -195,19 +195,8 @@ namespace Projeto
             Glut.glutDisplayFunc(display);
             Glut.glutTimerFunc(40, Timer, 1);
             Glut.glutTimerFunc(40, TimerNuvem, 1);
-            Glut.glutReshapeFunc(OnReshape);
             inicializa();
             Glut.glutMainLoop();
-        }
-
-        static void desenha()
-        {
-            Gl.glClear(Gl.GL_COLOR_BUFFER_BIT);
-            fundo(corFundo);
-
-            DesenharVariasNuvens();
-
-            Glut.glutSwapBuffers();
         }
 
         static void inicializa()
