@@ -26,6 +26,9 @@ namespace Projeto
         const int height = 800;
         static bool isCloudsAvailable = true;
         static bool isCarOn = true;
+        static bool isRedLightOn = false;
+        static bool isYellowLightOn = false;
+        static bool isGreenLightOn = true;
 
 
         static void desenhaRoda(bool isFrontWheel)
@@ -162,7 +165,7 @@ namespace Projeto
             desenhaRoda(false);
             desenhaCarro();
 
-
+            DrawTrafficLight();
 
             Glut.glutSwapBuffers();
             Glut.glutPostRedisplay(); // Add this line to force a constant redrawing of the scene
@@ -527,6 +530,24 @@ namespace Projeto
                 case 5:
                     isCarOn = !isCarOn;
                     break;
+                case 6:
+                    isRedLightOn = true;
+                    isYellowLightOn = false;
+                    isGreenLightOn = false;
+                    isCarOn = false;
+                    break;
+                case 7:
+                    isRedLightOn = false;
+                    isYellowLightOn = true;
+                    isGreenLightOn = false;
+                    isCarOn = false;
+                    break;
+                case 8:
+                    isRedLightOn = false;
+                    isYellowLightOn = false;
+                    isGreenLightOn = true;
+                    isCarOn = true;
+                    break;
             }
         }
 
@@ -537,8 +558,86 @@ namespace Projeto
             Glut.glutAddMenuEntry("Trocar cor do carro para verde", 2);
             Glut.glutAddMenuEntry("Trocar cor do carro para vermelho", 3);
             Glut.glutAddMenuEntry("Remover nuvens", 4);
-            Glut.glutAddMenuEntry("Desligar o carro", 5);
+            Glut.glutAddMenuEntry("Desligar/Ligar carro", 5);
+            Glut.glutAddMenuEntry("Semaforo vermelho", 6);
+            Glut.glutAddMenuEntry("Semaforo amarelo", 7);
+            Glut.glutAddMenuEntry("Semaforo verde", 8);
             Glut.glutAttachMenu(Glut.GLUT_RIGHT_BUTTON);
         }
+
+        private static void DrawRectangle(float x, float y, float width, float height)
+        {
+            Gl.glBegin(Gl.GL_QUADS);
+            Gl.glVertex2f(x, y);
+            Gl.glVertex2f(x + width, y);
+            Gl.glVertex2f(x + width, y + height);
+            Gl.glVertex2f(x, y + height);
+            Gl.glEnd();
+        }
+
+        private static void DrawCircle(float x, float y, float radius)
+        {
+            int segments = 30;
+            Gl.glBegin(Gl.GL_TRIANGLE_FAN);
+            for (int i = 0; i <= segments; i++)
+            {
+                float angle = (float)(i * 2 * Math.PI / segments);
+                float xPos = x + (float)Math.Cos(angle) * radius;
+                float yPos = y + (float)Math.Sin(angle) * radius;
+                Gl.glVertex2f(xPos, yPos);
+            }
+            Gl.glEnd();
+        }
+
+        private static void DrawTrafficLight()
+        {
+            Gl.glPushMatrix();
+            Gl.glScalef(0.3f, 0.3f, 0.3f);
+            Gl.glTranslatef(3f, 2f, 0.0f);
+            // Estrutura do semáforo
+            Gl.glColor3f(0.0f, 0.0f, 0.0f);
+            DrawRectangle(-0.2f, -0.6f, 0.4f, 1.2f);
+
+            // Luz vermelha
+            if (isRedLightOn)
+            {
+                Gl.glColor3f(1.0f, 0.0f, 0.0f);
+            }
+
+            if (!isRedLightOn)
+            {
+                Gl.glColor3f(0.1f, 0.0f, 0.0f);
+            }
+            DrawCircle(-0.0f, 0.4f, 0.15f);
+
+            // Luz amarela
+            if (isYellowLightOn)
+            {
+                Gl.glColor3f(1.0f, 1.0f, 0.0f);
+            }
+
+            if (!isYellowLightOn)
+            {
+                Gl.glColor3f(0.1f, 0.1f, 0.0f);
+            }
+            
+            DrawCircle(-0.0f, 0.0f, 0.15f);
+
+            // Luz verde
+            if (isGreenLightOn)
+            {
+                Gl.glColor3f(0.0f, 1.0f, 0.0f);
+            }
+
+            if (!isGreenLightOn)
+            {
+                Gl.glColor3f(0.0f, 0.1f, 0.0f);
+            }
+            
+            DrawCircle(-0.0f, -0.4f, 0.15f);
+            Gl.glPopMatrix();
+
+        }
+
     }
 }
