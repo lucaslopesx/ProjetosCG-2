@@ -531,24 +531,37 @@ namespace Projeto
                     isCarOn = !isCarOn;
                     break;
                 case 6:
-                    isRedLightOn = true;
-                    isYellowLightOn = false;
-                    isGreenLightOn = false;
-                    isCarOn = false;
+                    ligarSemaforoVermelho();
                     break;
                 case 7:
-                    isRedLightOn = false;
-                    isYellowLightOn = true;
-                    isGreenLightOn = false;
-                    isCarOn = false;
+                    ligarSemaforoAmarelo();
                     break;
                 case 8:
-                    isRedLightOn = false;
-                    isYellowLightOn = false;
-                    isGreenLightOn = true;
-                    isCarOn = true;
+                    ligarSemaforoVerde();
                     break;
             }
+        }
+
+        private static void ligarSemaforoVermelho() 
+        {
+            isRedLightOn = true;
+            isYellowLightOn = false;
+            isGreenLightOn = false;
+            isCarOn = false;
+        }
+        private static void ligarSemaforoAmarelo() 
+        {
+            isRedLightOn = false;
+            isYellowLightOn = true;
+            isGreenLightOn = false;
+            isCarOn = false;
+        }
+        private static void ligarSemaforoVerde() 
+        {
+            isRedLightOn = false;
+            isYellowLightOn = false;
+            isGreenLightOn = true;
+            isCarOn = true;
         }
 
         private static void CreatePopupMenu()
