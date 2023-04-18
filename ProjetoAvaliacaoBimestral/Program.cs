@@ -30,6 +30,52 @@ namespace Projeto
         static bool isYellowLightOn = false;
         static bool isGreenLightOn = true;
 
+        static void Main(string[] args)
+        {
+            Glut.glutInit();
+            Glut.glutInitDisplayMode(Glut.GLUT_DOUBLE | Glut.GLUT_RGB);
+            Glut.glutInitWindowSize(width, height);
+            Glut.glutCreateWindow("Carro");
+            Glut.glutSpecialFunc(TeclasEspeciais);
+            Glut.glutDisplayFunc(display);
+            Glut.glutTimerFunc(40, Timer, 1);
+            Glut.glutTimerFunc(40, TimerNuvem, 1);
+            CriarMenu();
+            inicializa();
+            Glut.glutMainLoop();
+        }
+
+        static void inicializa()
+        {
+            Gl.glMatrixMode(Gl.GL_MODELVIEW);
+            Gl.glLoadIdentity();
+            Glu.gluOrtho2D(0.0, 1.0, 0.0, 1.0);
+            Gl.glClearColor(1, 1, 1, 0);
+        }
+
+        static void display()
+        {
+            Gl.glClear(Gl.GL_COLOR_BUFFER_BIT);
+
+            rot -= 0.8f;
+
+            fundo(CorFundo);
+
+            if (isCloudsAvailable)
+            {
+                DesenharVariasNuvens();
+            }
+
+            desenhaRoda(true);
+            desenhaRoda(false);
+            desenhaCarro();
+
+            desenharSemaforo();
+
+            Glut.glutSwapBuffers();
+            Glut.glutPostRedisplay();
+        }
+
 
         static void desenhaRoda(bool isFrontWheel)
         {
@@ -52,7 +98,7 @@ namespace Projeto
 
             Gl.glScalef(0.3f, 0.3f, 0.3f);
 
-            // Draw the tire
+            // pneu
             float raio = 0.1f;
             int numSegments = 30;
             Gl.glColor3f(0.0f, 0.0f, 0.3f);
@@ -66,7 +112,7 @@ namespace Projeto
             }
             Gl.glEnd();
 
-            // Draw the rim
+            // aro
             raio = 0.05f;
             Gl.glColor3f(0.7f, 0.7f, 0.7f);
             Gl.glBegin(Gl.GL_POLYGON);
@@ -79,7 +125,6 @@ namespace Projeto
             }
             Gl.glEnd();
 
-            // Draw lines on the rim
             int numLines = 8;
             Gl.glColor3f(0.3f, 0.3f, 0.3f);
             Gl.glBegin(Gl.GL_LINES);
@@ -104,10 +149,10 @@ namespace Projeto
             Cor corpo = CorCarro;
             Cor teto = CorTetoCarro;
             Gl.glPushMatrix();
-            Gl.glTranslatef(carPositionX, 0.15f, 0.0f); // Use the carPositionX variable for translation
+            Gl.glTranslatef(carPositionX, 0.15f, 0.0f);
             Gl.glScalef(0.2f, 0.2f, 0.2f);
 
-            // Draw the car body
+            // corpo
             Gl.glColor3f(corpo.R, corpo.G, corpo.B);
             Gl.glPolygonMode(Gl.GL_FRONT_AND_BACK, Gl.GL_FILL);
             Gl.glBegin(Gl.GL_POLYGON);
@@ -119,7 +164,7 @@ namespace Projeto
             Gl.glVertex2f(-0.6f, 0.2f);
             Gl.glEnd();
 
-            // Draw the car roof
+            // teto
             Gl.glColor3f(teto.R, teto.G, teto.B);
             Gl.glPolygonMode(Gl.GL_FRONT_AND_BACK, Gl.GL_FILL);
             Gl.glBegin(Gl.GL_POLYGON);
@@ -129,12 +174,9 @@ namespace Projeto
             Gl.glVertex2f(-0.3f, 0.5f);
             Gl.glEnd();
 
-            // Draw the windows
+            // janela
             Gl.glColor3f(1.0f, 1.0f, 1.0f);
             Gl.glBegin(Gl.GL_QUADS);
-
-
-            // Right window
             Gl.glVertex2f(0.0f, 0.4f);
             Gl.glVertex2f(0.3f, 0.4f);
             Gl.glVertex2f(0.3f, 0.47f);
@@ -142,41 +184,14 @@ namespace Projeto
 
             Gl.glEnd();
             Gl.glPopMatrix();
-        }
-
-
-
-
-
-        static void display()
-        {
-            Gl.glClear(Gl.GL_COLOR_BUFFER_BIT);
-
-            rot -= 0.8f; // Add this line to increment the rotation value
-
-            fundo(CorFundo);
-
-            if (isCloudsAvailable)
-            {
-                DesenharVariasNuvens();
-            }
-
-            desenhaRoda(true);
-            desenhaRoda(false);
-            desenhaCarro();
-
-            DrawTrafficLight();
-
-            Glut.glutSwapBuffers();
-            Glut.glutPostRedisplay(); // Add this line to force a constant redrawing of the scene
-        }
+        }        
 
         static void TeclasEspeciais(int key, int x, int y)
         {
             switch (key)
             {
                 case Glut.GLUT_KEY_LEFT:
-                    if (carPositionX > 0.1f && isCarOn) // Check if the car is within the left boundary
+                    if (carPositionX > 0.1f && isCarOn) 
                     {
                         rot += 10.0f;
                         carPositionX -= 0.05f;
@@ -184,67 +199,17 @@ namespace Projeto
                     break;
 
                 case Glut.GLUT_KEY_RIGHT:
-                    if (carPositionX < 0.9f && isCarOn) // Check if the car is within the right boundary
+                    if (carPositionX < 0.9f && isCarOn) 
                     {
                         rot -= 10.0f;
                         carPositionX += 0.05f;
                     }
-                    break;
-
-                case Glut.GLUT_KEY_UP: // Add case for the up arrow key
-                    break;
-
-                case Glut.GLUT_KEY_DOWN: // Add case for the down arrow key
                     break;
             }
 
             Glut.glutPostRedisplay();
         }
 
-
-        static void Main(string[] args)
-        {
-            Glut.glutInit();
-            Glut.glutInitDisplayMode(Glut.GLUT_DOUBLE | Glut.GLUT_RGB);
-            Glut.glutInitWindowSize(width, height);
-            Glut.glutCreateWindow("Carro");
-            Glut.glutSpecialFunc(TeclasEspeciais);
-            Glut.glutDisplayFunc(display);
-            Glut.glutTimerFunc(40, Timer, 1);
-            Glut.glutTimerFunc(40, TimerNuvem, 1);
-            CreatePopupMenu();
-            inicializa();
-            Glut.glutMainLoop();
-        }
-
-        static void inicializa()
-        {
-            Gl.glMatrixMode(Gl.GL_MODELVIEW);
-            Gl.glLoadIdentity();
-            Glu.gluOrtho2D(0.0, 1.0, 0.0, 1.0);
-            Gl.glClearColor(1, 1, 1, 0);
-        }
-
-        private static void OnReshape(int width, int height)
-        {
-            Gl.glViewport(0, 0, width, height);
-            Gl.glMatrixMode(Gl.GL_PROJECTION);
-            Gl.glLoadIdentity();
-
-            float aspectRatio = (float)width / (float)height;
-
-            if (width <= height)
-            {
-                Gl.glOrtho(-1.0, 1.0, -1.0 / aspectRatio, 1.0 / aspectRatio, -1.0, 1.0);
-            }
-            else
-            {
-                Gl.glOrtho(-1.0 * aspectRatio, 1.0 * aspectRatio, -1.0, 1.0, -1.0, 1.0);
-            }
-
-            Gl.glMatrixMode(Gl.GL_MODELVIEW);
-            Gl.glLoadIdentity();
-        }
         static void fundo(Cor Cor)
         {
             Gl.glClear(Gl.GL_COLOR_BUFFER_BIT);
@@ -255,7 +220,6 @@ namespace Projeto
 
         static void TimerNuvem(int value)
         {
-            //TODO - Melhorando isso com um laço de repetição
             AlterandoPosicaoNuvens();
 
             Glut.glutPostRedisplay();
@@ -475,7 +439,6 @@ namespace Projeto
         }
 
 
-        //TODO - Desenhar uma nuvem com mais detalhes
         static void desenhaNuvem()
         {
             Gl.glColor3f(1.0f, 1.0f, 1.0f);
@@ -508,7 +471,7 @@ namespace Projeto
             Glut.glutSwapBuffers();
         }
 
-        private static void MenuCallback(int value)
+        private static void MenuSwitch(int value)
         {
             switch (value)
             {
@@ -564,9 +527,9 @@ namespace Projeto
             isCarOn = true;
         }
 
-        private static void CreatePopupMenu()
+        private static void CriarMenu()
         {
-            int menu = Glut.glutCreateMenu(MenuCallback);
+            int menu = Glut.glutCreateMenu(MenuSwitch);
             Glut.glutAddMenuEntry("Trocar cor do carro para azul", 1);
             Glut.glutAddMenuEntry("Trocar cor do carro para verde", 2);
             Glut.glutAddMenuEntry("Trocar cor do carro para vermelho", 3);
@@ -578,7 +541,7 @@ namespace Projeto
             Glut.glutAttachMenu(Glut.GLUT_RIGHT_BUTTON);
         }
 
-        private static void DrawRectangle(float x, float y, float width, float height)
+        private static void desenharRetangulo(float x, float y, float width, float height)
         {
             Gl.glBegin(Gl.GL_QUADS);
             Gl.glVertex2f(x, y);
@@ -588,7 +551,7 @@ namespace Projeto
             Gl.glEnd();
         }
 
-        private static void DrawCircle(float x, float y, float radius)
+        private static void desenharCirculo(float x, float y, float radius)
         {
             int segments = 30;
             Gl.glBegin(Gl.GL_TRIANGLE_FAN);
@@ -602,14 +565,13 @@ namespace Projeto
             Gl.glEnd();
         }
 
-        private static void DrawTrafficLight()
+        private static void desenharSemaforo()
         {
             Gl.glPushMatrix();
             Gl.glScalef(0.3f, 0.3f, 0.3f);
             Gl.glTranslatef(3f, 2f, 0.0f);
-            // Estrutura do semáforo
             Gl.glColor3f(0.0f, 0.0f, 0.0f);
-            DrawRectangle(-0.2f, -0.6f, 0.4f, 1.2f);
+            desenharRetangulo(-0.2f, -0.6f, 0.4f, 1.2f);
 
             // Luz vermelha
             if (isRedLightOn)
@@ -621,7 +583,7 @@ namespace Projeto
             {
                 Gl.glColor3f(0.1f, 0.0f, 0.0f);
             }
-            DrawCircle(-0.0f, 0.4f, 0.15f);
+            desenharCirculo(-0.0f, 0.4f, 0.15f);
 
             // Luz amarela
             if (isYellowLightOn)
@@ -633,8 +595,8 @@ namespace Projeto
             {
                 Gl.glColor3f(0.1f, 0.1f, 0.0f);
             }
-            
-            DrawCircle(-0.0f, 0.0f, 0.15f);
+
+            desenharCirculo(-0.0f, 0.0f, 0.15f);
 
             // Luz verde
             if (isGreenLightOn)
@@ -646,8 +608,8 @@ namespace Projeto
             {
                 Gl.glColor3f(0.0f, 0.1f, 0.0f);
             }
-            
-            DrawCircle(-0.0f, -0.4f, 0.15f);
+
+            desenharCirculo(-0.0f, -0.4f, 0.15f);
             Gl.glPopMatrix();
 
         }
